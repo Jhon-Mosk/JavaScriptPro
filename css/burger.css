@@ -1,0 +1,39 @@
+.burger-wrap {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bigBurger-img, .smallBurger-img {
+    display: block;
+    margin: 0 auto;
+    transition: all ease-out 0.5s;
+}
+
+.topping {
+    display: flex;
+}
+
+.topping__item, .stuffing__item {
+    height: 200px;
+    transition: all ease-out 0.5s;
+    opacity: 0.5;
+}
+
+.topping__item:hover, .stuffing__item:hover, .bigBurger-img:hover, .smallBurger-img:hover {
+    border: 3px solid black;
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.stuffing {
+    display: flex;
+}
+
+.disable {
+    opacity: 0.5;
+}
+
+.active {
+    opacity: 1;
+    border: 3px solid black;
+}
