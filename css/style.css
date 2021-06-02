@@ -20,6 +20,10 @@
     margin: 10px 10px;
 }
 
+.cart_none {
+    display: none;
+}
+
 .cart-sum {
     border: 1px solid black;
     background: lightcoral;
