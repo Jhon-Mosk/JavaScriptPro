@@ -15,21 +15,29 @@ class GoodsItem {
 class GoodsList {
   constructor() {
     this.goods = [];
+    this.filteredGoods = [];
   }
 
   async fetchGoods() {
     let response = await fetch(`${API_URL}/catalogData.json`)
     if(response.ok) {
       let json = await response.json();
-      this.goods = json; 
+      this.goods = json;
+      this.filteredGoods = json; 
     } else {
       alert("Ошибка HTTP: " + response.status);
     }
   }
 
+  filterGoods(value) {
+    const regExp = new RegExp(value, 'i')
+    this.filteredGoods = this.goods.filter(good => regExp.test(good.product_name))
+    this.render()
+  }
+
   render() {
     let listHtml = '';    
-    this.goods.forEach(good => {
+    this.filteredGoods.forEach(good => {
       const goodItem = new GoodsItem(good.product_name, good.price, good.id_product);
       listHtml += goodItem.render();
     });
@@ -96,6 +104,19 @@ const init = async () => {
   const list = new GoodsList();
   await list.fetchGoods();
   list.render();
+
+  const searchButton = document.querySelector('.search-button')
+  const searchInput = document.querySelector('.goods-search')
+
+  searchButton.addEventListener('click', () => {
+    list.filterGoods(searchInput.value)
+  })
+
+  searchInput.addEventListener('keydown', (event) => {
+    if(event.keyCode === 13) {
+      list.filterGoods(searchInput.value)
+    }
+  })
 }
 
 window.onload = init
