@@ -30,6 +30,7 @@ class GoodsList {
     try {
       let response = await fetch(`${API_URL}/catalogData.json`);
       this.goods = await response.json();
+      this.filteredGoods = this.goods;
     } catch (error) {
       alert("Ошибка HTTP: " + error.status);
     }

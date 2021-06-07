@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>eShop</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <main>
+      <div id="app">
+        <input type="text" v-model="name">
+        <h1 v-if="name.length != 0">Hello, {{ upperCaseName }}</h1>
+        <ul>
+          <li v-for="name in names" @click="clickHandler">
+            <pre>{{ name }}</pre>
+          </li>
+        </ul>
+      </div>
+      <header class="header">
+        <input type="text" class="goods-search">
+        <button class="search-button" type="button">Искать</button>
+        <button class="cart-button" onclick="cart.displayCart()" type="button">Корзина</button>
+      </header>
+      <main>
+        <div class="goods-list"></div>        
+      </main>
+      <section>
+        <div class="cart cart_none">
+          <div class="cart-list"></div>
+          <div class="cart-sum"></div>         
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
