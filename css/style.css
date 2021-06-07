@@ -28,3 +28,7 @@
     border: 1px solid black;
     background: lightcoral;
 }
+
+.cart-button {
+    margin-left: auto;
+}

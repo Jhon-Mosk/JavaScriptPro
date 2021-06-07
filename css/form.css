@@ -1,0 +1,40 @@
+.feedback-adress-wrap {
+    display: flex;
+    justify-content: space-between;    
+}
+
+.feedback {
+    max-width: 40%;
+    margin: 0 auto;
+}
+
+.feedback__title, .adress__title {
+    text-align: center;
+}
+
+.feedback__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback__form input {
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.feedback__form #email,  .feedback__form #theme{
+    text-transform: none;
+}
+
+.feedback__form input:focus {
+    background: #e0dddd;
+}
+
+.feedback__form textarea {
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.error {
+    outline: 3px solid red !important;
+}
