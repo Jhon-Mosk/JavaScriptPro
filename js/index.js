@@ -25,13 +25,13 @@ class GoodsList {
     try {
       let response = await fetch(`${API_URL}/catalogData.json`);
       this.goods = await response.json();
-      } catch(error) {
+    } catch (error) {
       alert("Ошибка HTTP: " + error.status);
-      }
+    }
   }
 
   render() {
-    let listHtml = '';    
+    let listHtml = '';
     this.goods.forEach(good => {
       const goodItem = new GoodsItem(good.product_name, good.price, good.id_product);
       listHtml += goodItem.render();
@@ -67,12 +67,19 @@ const cart = {
      * необходимо привести его к массиву, чтобы воспользоваться методом find.
      *  Для этого необходимо воспользоваться методом Array.from 
      * */
-    const foundItem = Array.from(obg.children).find(child => child.classList.contains("cart-item__price"));
-    return foundItem.innerHtml;
+    for (let i in obg.children) {
+      if (obg.children[i].classList.contains("cart-item__price")) {
+        return obg.children[i].innerHTML;
+      }
+    }
+    // const foundItem = Array.from(obg.children).find(child => child.classList.contains("cart-item__price"));
+    // return foundItem.innerHtml;
   },
 
   addToCart(event) {
-    const { parentElement } = event.srcElement
+    const {
+      parentElement
+    } = event.srcElement
     let title = parentElement.querySelector(".goods-item__title").innerHTML
     let price = parentElement.querySelector(".goods-item__price").innerHTML
     const item = new CartItem(title, price);
@@ -87,12 +94,12 @@ const cart = {
     let cartList = document.querySelector(".cart-list");
 
     cartList.innerHTML = "";
-    
+
     for (let i of cartItem) {
       if (!i.hasAttribute("data-del")) {
         cartList.innerHTML += i.outerHTML;
       } else {
-        result.sum(-cart.findPrice(i))  
+        result.sum(-cart.findPrice(i))
       }
     }
   },
