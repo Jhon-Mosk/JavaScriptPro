@@ -33,15 +33,20 @@ markError = (pattern, target) => {
     if (!pattern.test(target.value)) {
         target.classList.add("error")
         target.value = ""
-        if(target.id == "name") {
-            target.placeholder = "Имя содержит только буквы"
-        } else if(target.id == "phone") {
-            target.placeholder = "Телефон имеет вид +7(000)000-0000"
-        } else if(target.id == "email") {
-            target.placeholder = "E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru"
-        } else {
-            target.placeholder = "Значение поля задано не верно"
-        }
+        target.placeholder = {  //магия
+            name: "Имя содержит только буквы",
+            phone: "Телефон имеет вид +7(000)000-0000",
+            email: "E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru"
+            }[target.id] || "Значение поля задано не верно"
+        // if(target.id == "name") {
+        //     target.placeholder = "Имя содержит только буквы"
+        // } else if(target.id == "phone") {
+        //     target.placeholder = "Телефон имеет вид +7(000)000-0000"
+        // } else if(target.id == "email") {
+        //     target.placeholder = "E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru"
+        // } else {
+        //     target.placeholder = "Значение поля задано не верно"
+        // }
     }
 }
 
