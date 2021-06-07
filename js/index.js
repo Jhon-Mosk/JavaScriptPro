@@ -8,7 +8,11 @@ class GoodsItem {
   }
 
   render() {
-    return `<div class="goods-item" id="${this.id}"><h3 class="goods-item__title">${this.title}</h3><p class="goods-item__price">${this.price}</p><button class="buy-button" onclick="cart.addToCart(event)">Купить</button></div>`;
+    return `<div class="goods-item" id="${this.id}">
+    <h3 class="goods-item__title">${this.title}</h3>
+    <p class="goods-item__price">${this.price}</p>
+    <button class="buy-button" onclick="cart.addToCart(event)">Купить</button>
+    </div>`;
   }
 }
 
@@ -18,13 +22,12 @@ class GoodsList {
   }
 
   async fetchGoods() {
-    let response = await fetch(`${API_URL}/catalogData.json`)
-    if(response.ok) {
-      let json = await response.json();
-      this.goods = json; 
-    } else {
-      alert("Ошибка HTTP: " + response.status);
-    }
+    try {
+      let response = await fetch(`${API_URL}/catalogData.json`);
+      this.goods = await response.json();
+      } catch(error) {
+      alert("Ошибка HTTP: " + error.status);
+      }
   }
 
   render() {
@@ -39,7 +42,11 @@ class GoodsList {
 
 class CartItem extends GoodsItem {
   render() {
-    let item = `<div class="cart-item"><h3>${this.title}</h3><p class="cart-item__price">${this.price}</p><button class="buy-button" onclick="cart.delProduct(event)">Удалить</button></div>`;
+    let item = `<div class="cart-item">
+    <h3>${this.title}</h3>
+    <p class="cart-item__price">${this.price}</p>
+    <button class="buy-button" onclick="cart.delProduct(event)">Удалить</button>
+    </div>`;
     document.querySelector('.cart-list').innerHTML += item;
   }
 }
@@ -47,18 +54,27 @@ class CartItem extends GoodsItem {
 const cart = {
 
   findPrice(obg) {
-    for (let i in obg.children) {
-      if (obg.children[i].classList.contains("cart-item__price")) {
-        return obg.children[i].innerHTML;
-      }
-    }
+    /** 
+     * for (let i in obg.children) { было так
+    //   if (obg.children[i].classList.contains("cart-item__price")) {
+    //     return obg.children[i].innerHTML;
+    //   }
+    // }
+     * 
+     * Для данного метода рекомендую использовать метод find,
+     *  который хранится в Array.prototype.
+     * Примечание: так как obg.children имеет тип NodeList, 
+     * необходимо привести его к массиву, чтобы воспользоваться методом find.
+     *  Для этого необходимо воспользоваться методом Array.from 
+     * */
+    const foundItem = Array.from(obg.children).find(child => child.classList.contains("cart-item__price"));
+    return foundItem.innerHtml;
   },
 
   addToCart(event) {
-    let title = event.srcElement.parentElement.querySelector(".goods-item__title").innerHTML
-    let price = event.srcElement.parentElement.querySelector(".goods-item__price").innerHTML
-    console.log(title)
-    console.log(price)
+    const { parentElement } = event.srcElement
+    let title = parentElement.querySelector(".goods-item__title").innerHTML
+    let price = parentElement.querySelector(".goods-item__price").innerHTML
     const item = new CartItem(title, price);
     item.render();
     result.sum(price);
@@ -66,9 +82,12 @@ const cart = {
 
   delProduct(event) {
     event.target.parentElement.setAttribute("data-del", "true")
+
     let cartItem = document.querySelectorAll(".cart-item")
     let cartList = document.querySelector(".cart-list");
+
     cartList.innerHTML = "";
+    
     for (let i of cartItem) {
       if (!i.hasAttribute("data-del")) {
         cartList.innerHTML += i.outerHTML;
