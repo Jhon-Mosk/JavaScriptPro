@@ -12,6 +12,10 @@ class GoodsItem {
   }
 }
 
+deleteItem = () => {
+  console.log("delete")
+}
+
 class GoodsList {
   constructor() {
     this.goods = [];
@@ -65,8 +69,6 @@ const cart = {
   addToCart(event) {
     let title = event.srcElement.parentElement.querySelector(".goods-item__title").innerHTML
     let price = event.srcElement.parentElement.querySelector(".goods-item__price").innerHTML
-    console.log(title)
-    console.log(price)
     const item = new CartItem(title, price);
     item.render();
     result.sum(price);
