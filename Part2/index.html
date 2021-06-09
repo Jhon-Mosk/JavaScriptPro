@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>eShop</title>
-    <link rel="stylesheet" href="./css/style.css">
-  </head>
-  <body>
+
+<head>
+  <title>eShop</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header class="header">
+      <input type="text" class="goods-search" v-model="searchLine">
+      <button class="search-button" type="button" @click="filterGoods">Искать</button>
+      <button class="cart-button" type="button" @click="cartItems = []">Очистить корзину</button>
+    </header>
     <main>
-      <div id="app">
-        <input type="text" v-model="name">
-        <h1 v-if="name.length != 0">Hello, {{ upperCaseName }}</h1>
-        <ul>
-          <li v-for="name in names" @click="clickHandler">
-            <pre>{{ name }}</pre>
-          </li>
-        </ul>
-      </div>
-      <header class="header">
-        <input type="text" class="goods-search">
-        <button class="search-button" type="button">Искать</button>
-        <button class="cart-button" onclick="cart.displayCart()" type="button">Корзина</button>
-      </header>
-      <main>
-        <div class="goods-list"></div>        
-      </main>
-      <section>
-        <div class="cart cart_none">
-          <div class="cart-list"></div>
-          <div class="cart-sum"></div>         
+      <div class="goods-list">
+        <div class="goods-item" v-bind:id="good.id_product" v-for="good in filteredGoods">
+          <h3 class="goods-item__title">{{ good.product_name }}</h3>
+          <p class="goods-item__price">{{ good.price }}</p>
+          <button type="button" class="buy-button" @click="addToCart">Купить</button>
         </div>
-      </section>
+      </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-    <script src="./js/index.js"></script>
-  </body>
+    <section>
+      <div class="cart" v-if="cartItems.length != 0">
+        <div class="cart-list">
+          <div class="cart-item" v-bind:id="item.id_product" v-bind:data-index="index" v-for="(item, index) in cartItems">
+            <h3 class="cart-item__title">{{ item.product_name }}</h3>
+            <p class="cart-item__price">{{ item.price }}</p>
+            <button type="button" class="del-button" @click=delItem(index)>Удалить</button>
+          </div>
+        </div>
+        <div class="cart-sum">Итого: {{total}}</div>
+      </div>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
 </html>
