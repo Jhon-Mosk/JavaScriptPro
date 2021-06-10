@@ -15,11 +15,12 @@
     </header>
     <main>
       <div class="goods-list">
-        <div class="goods-item" v-bind:id="good.id_product" v-for="good in filteredGoods">
+        <div class="goods-item" v-bind:id="good.id_product" v-for="good in filteredGoods" v-if="filteredGoods.length != 0">
           <h3 class="goods-item__title">{{ good.product_name }}</h3>
           <p class="goods-item__price">{{ good.price }}</p>
           <button type="button" class="buy-button" @click="addToCart">Купить</button>
         </div>
+        <div class="goods-item" v-if="filteredGoods.length == 0">Нет данных</div>
       </div>
     </main>
     <section>
