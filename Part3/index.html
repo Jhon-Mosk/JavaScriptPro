@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>eShop</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/modal.css">
+</head>
+
+<body>
+  <div id="app">
+    <error></error>
+    <header class="header">
+      <search-wrap :search-line="searchLine"></search-wrap>
+      <button class="cart-button" type="button" @click="cartItems = []">Очистить корзину</button>
+    </header>
+    <main>
+      <goods-list :goods="filteredGoods"></goods-list>
+    </main>
+    <section>
+      <div class="cart" v-if="cartItems.length != 0">
+        <cart-list :cart-items="cartItems"></cart-list>
+        <div class="cart-sum">Итого: {{total}}</div>
+      </div>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/hystmodal.js"></script>
+</body>
+
+</html>
