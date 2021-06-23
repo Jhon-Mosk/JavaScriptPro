@@ -1,0 +1,21 @@
+{
+  "name": "lesson8",
+  "version": "1.0.0",
+  "description": "training project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "build": "webpack --config ./build/webpack.config.js"
+  },
+  "author": "Jhon Mosk",
+  "license": "ISC",
+  "dependencies": {
+    "copy-webpack-plugin": "^9.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jasmine": "^3.7.0",
+    "path": "^0.12.7",
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2"
+  }
+}

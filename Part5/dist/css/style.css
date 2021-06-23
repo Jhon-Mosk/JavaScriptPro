@@ -1,0 +1,30 @@
+.header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.goods-list, .cart-list {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.goods-item, .cart-item {
+    border: 1px solid wheat;
+    width: 150px;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 10px 10px;
+}
+
+.cart-sum {
+    border: 1px solid black;
+    background: lightcoral;
+}
+
+.cart-button {
+    margin-left: auto;
+}
