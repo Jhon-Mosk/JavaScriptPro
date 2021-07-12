@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eShop</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/modal.css">
+</head>
+
+<body>
+  <div id="app">
+    <error></error>
+    <header class="header">
+      <search-wrap :search-line="searchLine"></search-wrap>
+      <button class="cart-button" type="button" @click=clearCart>Очистить корзину</button>
+      <button class="cart-button" type="button" @click=clearStats>Очистить статистику</button>
+    </header>
+    <main>
+      <goods-list :goods="filteredGoods"></goods-list>
+    </main>
+    <section>
+      <div class="cart" v-if="cartItems.length != 0">
+        <cart-list :cart-items="cartItems"></cart-list>
+        <div class="cart-sum">Итого: {{total}}</div>
+      </div>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
